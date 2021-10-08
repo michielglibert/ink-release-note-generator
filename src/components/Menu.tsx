@@ -4,7 +4,7 @@ import MenuOption from "./MenuOption";
 
 interface Props {
 	menuOptions: string[];
-	handleChange: (arg0: string) => void;
+	handleChange: (arg0: unknown) => void;
 }
 
 const Menu: React.FC<Props> = ({ menuOptions, handleChange }) => {
@@ -24,7 +24,7 @@ const Menu: React.FC<Props> = ({ menuOptions, handleChange }) => {
 		if (key.downArrow) handleNextOption();
 		if (key.upArrow) handlePreviousOption();
 		if (key.return && menuOptions[activeOption])
-			handleChange(menuOptions[activeOption] as string);
+			handleChange(menuOptions[activeOption]);
 	});
 
 	return (

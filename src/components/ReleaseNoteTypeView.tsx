@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, Box, useInput } from "ink";
-import MenuOption from "./MenuOpton";
+import { Text, Box } from "ink";
 import { ReleaseNoteType } from "../types";
+import Menu from "./Menu";
 
 interface Props {
 	handleChange: (arg0: ReleaseNoteType) => void;
@@ -15,24 +15,6 @@ const ReleaseNoteTypeView: React.FC<Props> = ({ handleChange }) => {
 		"technical",
 		"other",
 	];
-	const [activeOption, setActiveOption] = React.useState(0);
-
-	const handleNextOption = () => {
-		if (activeOption === releaseTypeOptions.length - 1) setActiveOption(0);
-		else setActiveOption((activeOption) => activeOption + 1);
-	};
-
-	const handlePreviousOption = () => {
-		if (activeOption === 0) setActiveOption(releaseTypeOptions.length - 1);
-		else setActiveOption((activeOption) => activeOption - 1);
-	};
-
-	useInput((_, key) => {
-		if (key.downArrow) handleNextOption();
-		if (key.upArrow) handlePreviousOption();
-		if (key.return && releaseTypeOptions[activeOption])
-			handleChange(releaseTypeOptions[activeOption] as ReleaseNoteType);
-	});
 
 	return (
 		<Box flexDirection="column">
@@ -42,14 +24,10 @@ const ReleaseNoteTypeView: React.FC<Props> = ({ handleChange }) => {
 				</Box>
 			</Box>
 			<Text color="green">What type of releasenote do you want to add?</Text>
-			{releaseTypeOptions.map((releaseType, index) => (
-				<MenuOption
-					key={`MenuOption_${releaseType}`}
-					isActive={index === activeOption}
-				>
-					{releaseType}
-				</MenuOption>
-			))}
+			<Menu
+				menuOptions={releaseTypeOptions}
+				handleChange={(val) => handleChange(val as ReleaseNoteType)}
+			/>
 		</Box>
 	);
 };
