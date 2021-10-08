@@ -34,7 +34,7 @@ const App = () => {
 				[View.ReleaseNoteType]: (
 					<ReleaseNoteTypeView handleChange={handleReleaseNoteTypeChange} />
 				),
-				[View.Project]: <></>,
+				[View.Project]: <Text>{releaseNote.type}</Text>,
 				[View.Message]: <></>,
 			}[currentView] || <Text>View not defined</Text>}
 		</Box>

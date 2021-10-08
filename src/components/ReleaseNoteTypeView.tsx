@@ -12,7 +12,7 @@ const ReleaseNoteTypeView: React.FC<Props> = ({ handleChange }) => {
 		"feature",
 		"improvement",
 		"fix",
-		"improvement",
+		"technical",
 		"other",
 	];
 	const [activeOption, setActiveOption] = React.useState(0);
@@ -23,7 +23,7 @@ const ReleaseNoteTypeView: React.FC<Props> = ({ handleChange }) => {
 	};
 
 	const handlePreviousOption = () => {
-		if (activeOption === 0) setActiveOption(2);
+		if (activeOption === 0) setActiveOption(releaseTypeOptions.length - 1);
 		else setActiveOption((activeOption) => activeOption - 1);
 	};
 
@@ -31,9 +31,7 @@ const ReleaseNoteTypeView: React.FC<Props> = ({ handleChange }) => {
 		if (key.downArrow) handleNextOption();
 		if (key.upArrow) handlePreviousOption();
 		if (key.return && releaseTypeOptions[activeOption])
-			handleChange(
-				(releaseTypeOptions[activeOption] as ReleaseNoteType).toLowerCase()
-			);
+			handleChange(releaseTypeOptions[activeOption] as ReleaseNoteType);
 	});
 
 	return (

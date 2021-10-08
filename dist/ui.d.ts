@@ -1,5 +1,2 @@
-import { FC } from 'react';
-declare const App: FC<{
-    name?: string;
-}>;
+declare const App: () => JSX.Element;
 export default App;
