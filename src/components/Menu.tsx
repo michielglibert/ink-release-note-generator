@@ -18,7 +18,7 @@ const Menu: React.FC<Props> = ({
 }) => {
 	const menuOptions = [
 		...passedMenuOptions,
-		...(manualInputEnabled ? ["manual"] : []),
+		...(manualInputEnabled ? ["manual input"] : []),
 	];
 
 	const defaultOptionIndex = defaultOption
@@ -45,7 +45,7 @@ const Menu: React.FC<Props> = ({
 		if (key.downArrow) handleNextOption();
 		if (key.upArrow) handlePreviousOption();
 		if (key.return && menuOptions[activeOption]) {
-			if (menuOptions[activeOption] === "manual" && !manualInputActive) {
+			if (menuOptions[activeOption] === "manual input" && !manualInputActive) {
 				setManualInputActive(true);
 			} else if (manualInputActive) {
 				handleChange(manualInputValue);

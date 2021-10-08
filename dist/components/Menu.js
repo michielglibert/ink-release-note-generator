@@ -29,7 +29,7 @@ const Input_1 = __importDefault(require("./Input"));
 const Menu = ({ menuOptions: passedMenuOptions, handleChange, manualInputEnabled = true, defaultOption, }) => {
     const menuOptions = [
         ...passedMenuOptions,
-        ...(manualInputEnabled ? ["manual"] : []),
+        ...(manualInputEnabled ? ["manual input"] : []),
     ];
     const defaultOptionIndex = defaultOption
         ? menuOptions.findIndex((option) => option === defaultOption)
@@ -55,7 +55,7 @@ const Menu = ({ menuOptions: passedMenuOptions, handleChange, manualInputEnabled
         if (key.upArrow)
             handlePreviousOption();
         if (key.return && menuOptions[activeOption]) {
-            if (menuOptions[activeOption] === "manual" && !manualInputActive) {
+            if (menuOptions[activeOption] === "manual input" && !manualInputActive) {
                 setManualInputActive(true);
             }
             else if (manualInputActive) {
