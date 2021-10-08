@@ -8,7 +8,7 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"bundle": "webpack --config webpack.config.js",
+		"bundle": "npm run build  && webpack --config webpack.config.js",
 		"start": "npm run build && dist/cli.js",
 		"pretest": "npm run build",
 		"test": "xo && ava"

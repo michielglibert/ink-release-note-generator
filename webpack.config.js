@@ -6,7 +6,7 @@ module.exports = {
 	externalsPresets: { node: true },
 	externals: [nodeExternals()],
 	output: {
-		filename: "releasenote.js",
+		filename: "changelog.js",
 		path: path.resolve(__dirname, "build"),
 		clean: true,
 	},

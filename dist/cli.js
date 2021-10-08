@@ -7,4 +7,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const ink_1 = require("ink");
 const ui_1 = __importDefault(require("./ui"));
-(0, ink_1.render)(react_1.default.createElement(ui_1.default, null));
+const meow_1 = __importDefault(require("meow"));
+const cli = (0, meow_1.default)(`
+        Usage
+          $ test
+
+        Options
+                --root  Root to save releasenote file
+
+        Examples
+          $ test --root=..
+`, {
+    flags: {
+        root: {
+            type: "string",
+        },
+    },
+});
+(0, ink_1.render)(react_1.default.createElement(ui_1.default, { root: cli.flags.root }));
