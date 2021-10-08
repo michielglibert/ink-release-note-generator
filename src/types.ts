@@ -1,23 +1,6 @@
-export type ReleaseNoteType =
-	| "feature"
-	| "improvement"
-	| "fix"
-	| "technical"
-	| "other";
-
-export type Project =
-	| "general"
-	| "proflow"
-	| "louise"
-	| "claims"
-	| "campaigns"
-	| "toolkit"
-	| "settings"
-	| "smt"
-	| string;
-
 export interface ReleaseNote {
-	type?: ReleaseNoteType;
-	project?: Project;
+	type?: string;
+	project?: string;
 	message?: string;
+	flag?: boolean;
 }

@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, useInput } from "ink";
 import MenuOption from "./MenuOption";
+import Input from "./Input";
 
 interface Props {
 	menuOptions: string[];
 	handleChange: (arg0: unknown) => void;
+	manualInputEnabled?: boolean;
+	defaultOption?: string;
 }
 
-const Menu: React.FC<Props> = ({ menuOptions, handleChange }) => {
-	const [activeOption, setActiveOption] = React.useState(0);
+const Menu: React.FC<Props> = ({
+	menuOptions: passedMenuOptions,
+	handleChange,
+	manualInputEnabled = true,
+	defaultOption,
+}) => {
+	const menuOptions = [
+		...passedMenuOptions,
+		...(manualInputEnabled ? ["manual"] : []),
+	];
+
+	const defaultOptionIndex = defaultOption
+		? menuOptions.findIndex((option) => option === defaultOption)
+		: -1;
+
+	const [activeOption, setActiveOption] = React.useState(
+		defaultOptionIndex > -1 ? defaultOptionIndex : 0
+	);
+	const [manualInputActive, setManualInputActive] = useState<boolean>(false);
+	const [manualInputValue, setManualInputValue] = useState<string>("");
 
 	const handleNextOption = () => {
 		if (activeOption === menuOptions.length - 1) setActiveOption(0);
@@ -23,8 +44,16 @@ const Menu: React.FC<Props> = ({ menuOptions, handleChange }) => {
 	useInput((_, key) => {
 		if (key.downArrow) handleNextOption();
 		if (key.upArrow) handlePreviousOption();
-		if (key.return && menuOptions[activeOption])
-			handleChange(menuOptions[activeOption]);
+		if (key.return && menuOptions[activeOption]) {
+			if (menuOptions[activeOption] === "manual" && !manualInputActive) {
+				setManualInputActive(true);
+			} else if (manualInputActive) {
+				handleChange(manualInputValue);
+				setManualInputActive(false);
+			} else {
+				handleChange(menuOptions[activeOption]);
+			}
+		}
 	});
 
 	return (
@@ -37,6 +66,9 @@ const Menu: React.FC<Props> = ({ menuOptions, handleChange }) => {
 					{releaseType}
 				</MenuOption>
 			))}
+			{manualInputActive && (
+				<Input onChange={(arg0: string) => setManualInputValue(arg0)} />
+			)}
 		</Box>
 	);
 };

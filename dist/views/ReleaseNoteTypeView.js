@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
 const ink_1 = require("ink");
-const Menu_1 = __importDefault(require("./Menu"));
+const Menu_1 = __importDefault(require("../components/Menu"));
 const ReleaseNoteTypeView = ({ handleChange }) => {
     const releaseTypeOptions = [
         "feature",
