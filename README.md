@@ -1,0 +1,1 @@
+# ink-release-note-generator
